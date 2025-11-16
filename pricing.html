@@ -141,6 +141,15 @@
             color: #323338;
         }
         
+        .features li.disabled {
+            opacity: 0.4;
+        }
+        
+        .features li.disabled:before {
+            content: "−";
+            color: #c4c4c4;
+        }
+        
         .highlight {
             background: #e6f4ff;
             padding: 20px;
@@ -192,10 +201,12 @@
                 <div class="price-period">forever</div>
                 
                 <ul class="features">
-                    <li><strong>Up to 10 dependencies</strong> per item</li>
+                    <li><strong>Up to 10 dependencies</strong><br><span style="font-size: 13px; color: #999;">per item</span></li>
                     <li>View predecessors & dependents</li>
                     <li>Task statuses & due dates</li>
                     <li>All filtering options</li>
+                    <li class="disabled">Unlimited dependencies</li>
+                    <li class="disabled">Priority support</li>
                 </ul>
             </div>
             
