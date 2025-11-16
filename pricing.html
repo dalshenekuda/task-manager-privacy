@@ -20,7 +20,7 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
         }
         
@@ -51,7 +51,7 @@
         
         .pricing-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             margin-top: 40px;
         }
@@ -72,11 +72,6 @@
         
         .pricing-card.featured {
             border: 3px solid #0073ea;
-            transform: scale(1.05);
-        }
-        
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-5px);
         }
         
         .badge {
@@ -93,7 +88,7 @@
         }
         
         .plan-name {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             color: #323338;
             margin-bottom: 10px;
@@ -102,19 +97,19 @@
         .plan-description {
             color: #676879;
             font-size: 14px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             min-height: 40px;
         }
         
         .price {
-            font-size: 48px;
+            font-size: 56px;
             font-weight: 700;
             color: #323338;
             margin-bottom: 5px;
         }
         
         .price-currency {
-            font-size: 24px;
+            font-size: 28px;
             vertical-align: super;
         }
         
@@ -130,17 +125,18 @@
         }
         
         .features li {
-            padding: 12px 0;
+            padding: 14px 0;
             color: #676879;
             display: flex;
             align-items: flex-start;
+            font-size: 15px;
         }
         
         .features li:before {
             content: "✓";
             color: #00c875;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 20px;
             margin-right: 12px;
             flex-shrink: 0;
         }
@@ -154,9 +150,13 @@
             color: #c4c4c4;
         }
         
+        .features li strong {
+            color: #323338;
+        }
+        
         .cta-button {
             width: 100%;
-            padding: 15px 30px;
+            padding: 16px 30px;
             border: none;
             border-radius: 8px;
             font-size: 16px;
@@ -175,6 +175,8 @@
         
         .cta-button.primary:hover {
             background: #0060b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,115,234,0.3);
         }
         
         .cta-button.secondary {
@@ -198,13 +200,19 @@
         
         .note h3 {
             color: #323338;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 24px;
         }
         
         .note p {
             color: #676879;
             max-width: 800px;
-            margin: 0 auto 15px;
+            margin: 0 auto 20px;
+            line-height: 1.8;
+        }
+        
+        .note p:last-child {
+            margin-bottom: 0;
         }
         
         .highlight {
@@ -218,6 +226,46 @@
         .highlight p {
             color: #323338;
             margin: 0;
+            font-size: 16px;
+        }
+        
+        .comparison {
+            margin-top: 50px;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .comparison h3 {
+            text-align: center;
+            color: #323338;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .comparison-item {
+            padding: 15px;
+            background: #f5f6f8;
+            border-radius: 8px;
+        }
+        
+        .comparison-item h4 {
+            color: #323338;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .comparison-item p {
+            color: #676879;
+            font-size: 14px;
+            margin: 0;
         }
         
         @media (max-width: 768px) {
@@ -225,12 +273,16 @@
                 grid-template-columns: 1fr;
             }
             
-            .pricing-card.featured {
-                transform: scale(1);
+            .comparison-grid {
+                grid-template-columns: 1fr;
             }
             
             h1 {
                 font-size: 32px;
+            }
+            
+            .price {
+                font-size: 48px;
             }
         }
     </style>
@@ -240,38 +292,40 @@
         <div class="header">
             <p class="app-name">Two-Way Dependencies for Monday.com</p>
             <h1>Simple, Transparent Pricing</h1>
-            <p class="subtitle">Choose the plan that fits your team. All plans include core dependency tracking features.</p>
+            <p class="subtitle">Start free, upgrade when you need more. No credit card required.</p>
         </div>
         
         <div class="highlight">
-            <p><strong>💡 All prices are per workspace per month.</strong> No hidden fees, cancel anytime.</p>
+            <p><strong>💡 All prices are per workspace per month.</strong> No hidden fees, cancel anytime. 14-day money-back guarantee.</p>
         </div>
         
         <div class="pricing-cards">
             <!-- Free Plan -->
             <div class="pricing-card">
                 <div class="plan-name">Free</div>
-                <div class="plan-description">Perfect for trying out the app</div>
+                <div class="plan-description">Perfect for small teams trying out the app</div>
                 <div class="price"><span class="price-currency">$</span>0</div>
                 <div class="price-period">forever free</div>
                 
                 <ul class="features">
-                    <li>Up to 10 dependencies per item</li>
+                    <li><strong>Up to 10 dependencies</strong> per item</li>
                     <li>View predecessors & dependents</li>
                     <li>Task status display</li>
                     <li>Due date tracking</li>
                     <li>Basic filtering</li>
+                    <li>Auto-refresh on changes</li>
                     <li>Community support</li>
                     <li class="disabled">Advanced filters</li>
+                    <li class="disabled">Urgency indicators</li>
                     <li class="disabled">Priority support</li>
                 </ul>
                 
-                <a href="#" class="cta-button secondary">Get Started Free</a>
+                <a href="#" class="cta-button secondary">Start Free</a>
             </div>
             
             <!-- Pro Plan -->
             <div class="pricing-card featured">
-                <div class="badge">Most Popular</div>
+                <div class="badge">Recommended</div>
                 <div class="plan-name">Pro</div>
                 <div class="plan-description">For teams that need unlimited tracking</div>
                 <div class="price"><span class="price-currency">$</span>5</div>
@@ -285,31 +339,34 @@
                     <li><strong>Advanced filtering</strong></li>
                     <li><strong>Urgency indicators</strong></li>
                     <li><strong>Overdue tracking</strong></li>
-                    <li>Priority email support</li>
+                    <li>Auto-refresh on changes</li>
+                    <li><strong>Priority email support</strong></li>
+                    <li><strong>All future features</strong></li>
                 </ul>
                 
-                <a href="#" class="cta-button primary">Start Pro Trial</a>
+                <a href="#" class="cta-button primary">Upgrade to Pro</a>
             </div>
-            
-            <!-- Enterprise Plan -->
-            <div class="pricing-card">
-                <div class="plan-name">Enterprise</div>
-                <div class="plan-description">For large teams with premium needs</div>
-                <div class="price"><span class="price-currency">$</span>10</div>
-                <div class="price-period">per workspace / month</div>
-                
-                <ul class="features">
-                    <li><strong>Everything in Pro</strong></li>
-                    <li>Unlimited dependencies</li>
-                    <li>All advanced features</li>
-                    <li><strong>Priority support 24/7</strong></li>
-                    <li><strong>Dedicated account manager</strong></li>
-                    <li><strong>Custom feature requests</strong></li>
-                    <li><strong>SLA guarantee</strong></li>
-                    <li><strong>Early access to new features</strong></li>
-                </ul>
-                
-                <a href="#" class="cta-button primary">Contact Sales</a>
+        </div>
+        
+        <div class="comparison">
+            <h3>Why Upgrade to Pro?</h3>
+            <div class="comparison-grid">
+                <div class="comparison-item">
+                    <h4>🚀 No Limits</h4>
+                    <p>Track unlimited dependencies per item. Perfect for complex projects with many interconnected tasks.</p>
+                </div>
+                <div class="comparison-item">
+                    <h4>🎯 Advanced Filters</h4>
+                    <p>Filter by urgency, overdue status, and more. Find critical tasks instantly.</p>
+                </div>
+                <div class="comparison-item">
+                    <h4>⚡ Priority Support</h4>
+                    <p>Get help faster with priority email support. We respond within 24 hours.</p>
+                </div>
+                <div class="comparison-item">
+                    <h4>💎 Future Features</h4>
+                    <p>Get access to all new features as we release them. One low price forever.</p>
+                </div>
             </div>
         </div>
         
@@ -317,21 +374,23 @@
             <h3>Frequently Asked Questions</h3>
             
             <p><strong>How does billing work?</strong><br>
-            You're charged monthly per workspace. Cancel anytime with no penalties.</p>
+            You're charged monthly per workspace through Monday.com's secure payment system. Cancel anytime with no penalties or fees.</p>
             
-            <p><strong>Can I change plans?</strong><br>
-            Yes! Upgrade or downgrade anytime. Changes take effect immediately.</p>
+            <p><strong>Can I try Pro before buying?</strong><br>
+            Yes! We offer a 14-day money-back guarantee. If you're not satisfied, we'll refund you—no questions asked.</p>
+            
+            <p><strong>Can I change plans later?</strong><br>
+            Absolutely! Upgrade from Free to Pro anytime. Changes take effect immediately.</p>
             
             <p><strong>What payment methods do you accept?</strong><br>
-            We accept all major credit cards through Monday.com's secure payment system.</p>
+            We accept all major credit cards through Monday.com's secure payment platform.</p>
             
-            <p><strong>Do you offer refunds?</strong><br>
-            Yes, we offer a 14-day money-back guarantee for all paid plans.</p>
+            <p><strong>Is the Free plan really free forever?</strong><br>
+            Yes! No credit card required, no time limit. Use the Free plan as long as you want.</p>
             
             <p><strong>Need help choosing?</strong><br>
-            Start with the Free plan to try it out. You can always upgrade later!</p>
+            Start with Free to try it out. Most teams with 10+ interconnected tasks upgrade to Pro within the first week.</p>
         </div>
     </div>
 </body>
 </html>
-
