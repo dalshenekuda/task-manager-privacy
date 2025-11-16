@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Two-Way Dependencies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f6f8;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        h1 {
+            color: #323338;
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        
+        .app-name {
+            color: #0073ea;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #676879;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        
+        .pricing-card.featured {
+            border: 3px solid #0073ea;
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+        
+        .badge {
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            background: #0073ea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .plan-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #323338;
+            margin-bottom: 10px;
+        }
+        
+        .plan-description {
+            color: #676879;
+            font-size: 14px;
+            margin-bottom: 20px;
+            min-height: 40px;
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            color: #323338;
+            margin-bottom: 5px;
+        }
+        
+        .price-currency {
+            font-size: 24px;
+            vertical-align: super;
+        }
+        
+        .price-period {
+            font-size: 16px;
+            color: #676879;
+            margin-bottom: 30px;
+        }
+        
+        .features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .features li {
+            padding: 12px 0;
+            color: #676879;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .features li:before {
+            content: "✓";
+            color: #00c875;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .features li.disabled {
+            opacity: 0.4;
+        }
+        
+        .features li.disabled:before {
+            content: "−";
+            color: #c4c4c4;
+        }
+        
+        .cta-button {
+            width: 100%;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+        
+        .cta-button.primary {
+            background: #0073ea;
+            color: white;
+        }
+        
+        .cta-button.primary:hover {
+            background: #0060b9;
+        }
+        
+        .cta-button.secondary {
+            background: white;
+            color: #0073ea;
+            border: 2px solid #0073ea;
+        }
+        
+        .cta-button.secondary:hover {
+            background: #f0f7ff;
+        }
+        
+        .note {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .note h3 {
+            color: #323338;
+            margin-bottom: 15px;
+        }
+        
+        .note p {
+            color: #676879;
+            max-width: 800px;
+            margin: 0 auto 15px;
+        }
+        
+        .highlight {
+            background: #e6f4ff;
+            padding: 20px;
+            border-left: 4px solid #0073ea;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+        
+        .highlight p {
+            color: #323338;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <p class="app-name">Two-Way Dependencies for Monday.com</p>
+            <h1>Simple, Transparent Pricing</h1>
+            <p class="subtitle">Choose the plan that fits your team. All plans include core dependency tracking features.</p>
+        </div>
+        
+        <div class="highlight">
+            <p><strong>💡 All prices are per workspace per month.</strong> No hidden fees, cancel anytime.</p>
+        </div>
+        
+        <div class="pricing-cards">
+            <!-- Free Plan -->
+            <div class="pricing-card">
+                <div class="plan-name">Free</div>
+                <div class="plan-description">Perfect for trying out the app</div>
+                <div class="price"><span class="price-currency">$</span>0</div>
+                <div class="price-period">forever free</div>
+                
+                <ul class="features">
+                    <li>Up to 10 dependencies per item</li>
+                    <li>View predecessors & dependents</li>
+                    <li>Task status display</li>
+                    <li>Due date tracking</li>
+                    <li>Basic filtering</li>
+                    <li>Community support</li>
+                    <li class="disabled">Advanced filters</li>
+                    <li class="disabled">Priority support</li>
+                </ul>
+                
+                <a href="#" class="cta-button secondary">Get Started Free</a>
+            </div>
+            
+            <!-- Pro Plan -->
+            <div class="pricing-card featured">
+                <div class="badge">Most Popular</div>
+                <div class="plan-name">Pro</div>
+                <div class="plan-description">For teams that need unlimited tracking</div>
+                <div class="price"><span class="price-currency">$</span>5</div>
+                <div class="price-period">per workspace / month</div>
+                
+                <ul class="features">
+                    <li><strong>Unlimited dependencies</strong></li>
+                    <li>View predecessors & dependents</li>
+                    <li>Task status display</li>
+                    <li>Due date tracking</li>
+                    <li><strong>Advanced filtering</strong></li>
+                    <li><strong>Urgency indicators</strong></li>
+                    <li><strong>Overdue tracking</strong></li>
+                    <li>Priority email support</li>
+                </ul>
+                
+                <a href="#" class="cta-button primary">Start Pro Trial</a>
+            </div>
+            
+            <!-- Enterprise Plan -->
+            <div class="pricing-card">
+                <div class="plan-name">Enterprise</div>
+                <div class="plan-description">For large teams with premium needs</div>
+                <div class="price"><span class="price-currency">$</span>10</div>
+                <div class="price-period">per workspace / month</div>
+                
+                <ul class="features">
+                    <li><strong>Everything in Pro</strong></li>
+                    <li>Unlimited dependencies</li>
+                    <li>All advanced features</li>
+                    <li><strong>Priority support 24/7</strong></li>
+                    <li><strong>Dedicated account manager</strong></li>
+                    <li><strong>Custom feature requests</strong></li>
+                    <li><strong>SLA guarantee</strong></li>
+                    <li><strong>Early access to new features</strong></li>
+                </ul>
+                
+                <a href="#" class="cta-button primary">Contact Sales</a>
+            </div>
+        </div>
+        
+        <div class="note">
+            <h3>Frequently Asked Questions</h3>
+            
+            <p><strong>How does billing work?</strong><br>
+            You're charged monthly per workspace. Cancel anytime with no penalties.</p>
+            
+            <p><strong>Can I change plans?</strong><br>
+            Yes! Upgrade or downgrade anytime. Changes take effect immediately.</p>
+            
+            <p><strong>What payment methods do you accept?</strong><br>
+            We accept all major credit cards through Monday.com's secure payment system.</p>
+            
+            <p><strong>Do you offer refunds?</strong><br>
+            Yes, we offer a 14-day money-back guarantee for all paid plans.</p>
+            
+            <p><strong>Need help choosing?</strong><br>
+            Start with the Free plan to try it out. You can always upgrade later!</p>
+        </div>
+    </div>
+</body>
+</html>
+
